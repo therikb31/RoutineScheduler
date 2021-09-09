@@ -1,15 +1,14 @@
-from googleapiclient.discovery import build
-from google.auth import credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-import pickle
-scopes = ['https://www.googleapis.com/auth/calendar']
-flow = InstalledAppFlow.from_client_secrets_file("credentials.json",scopes=scopes)
-credentials = flow.run_console()
+from flask import Flask,render_template
 
-pickle.dump(credentials,open("token.pkl","wb"))
-credentials = pickle.load(open("token.pkl","rb"))
+app = Flask(__name__)
 
-service = build("calendar","v3",credentials=credentials)
+@app.route("/")
+def hello_world():
+    return render_template("index.html")
 
-result = service.events().list(calendarId='primary').execute()
-print(result['items'][0])
+@app.route("/scheduler")
+def scheduler():
+    return render_template("dynamicTable.html")
+    
+if __name__ == "__main__":
+    app.run(debug=True,port="8080")
