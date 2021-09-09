@@ -2,7 +2,7 @@ let i = 0;
 let j = 0;
 let time = [];
 let days = ["Monday", "Tuesday", "Wednesday", "Thurdsay", "Friday"];
-let events = [];
+let events = [];/*
 $(document).ready(function () {
     function compileData() {
         var js_data = JSON.stringify(events);
@@ -19,7 +19,10 @@ $(document).ready(function () {
             console.log("fail: ",textStatus, errorThrown);
         });
     };
-});
+});*/
+function compileData(){
+    console.log(events);
+}
 function updateTitle(i, j) {
     var f = 0;
     var event_title = [];
