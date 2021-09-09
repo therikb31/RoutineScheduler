@@ -2,7 +2,8 @@ let i = 0;
 let j = 0;
 let time = [];
 let days = ["Monday", "Tuesday", "Wednesday", "Thurdsay", "Friday"];
-let events = [];/*
+let events = [];
+/*
 $(document).ready(function () {
     function compileData() {
         var js_data = JSON.stringify(events);
@@ -20,9 +21,10 @@ $(document).ready(function () {
         });
     };
 });*/
-function compileData(){
+function compileData() {
     console.log(events);
 }
+
 function updateTitle(i, j) {
     var f = 0;
     var event_title = [];
@@ -31,17 +33,18 @@ function updateTitle(i, j) {
             var title = document.getElementById('title_form' + i + j).elements.namedItem("title").value;
             var link = document.getElementById('title_form' + i + j).elements.namedItem("link").value;
             var html = '<button type="button" data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">' + title + '</button>';
-            temp={from:time[a].from,to:time[a].to,title:title,link:link};
+            temp = { from: time[a].from, to: time[a].to, title: title, link: link };
             events.push(temp);
             $('#title' + i + j).html(html);
-            f=1;
+            f = 1;
             break;
         }
     }
-    if (f==0){
+    if (f == 0) {
         alert("Enter Time!");
     }
 };
+
 function updateTime(i, j) {
     var from = document.getElementById('time_form' + i + j).elements.namedItem("from").value;
     var to = document.getElementById('time_form' + i + j).elements.namedItem("to").value;
@@ -50,6 +53,7 @@ function updateTime(i, j) {
     time.push(temp);
     $('#time' + i + j).html(html);
 };
+
 function time_form(i, j) {
     var table_body = '<form id="time_form' + i + j + '">';
     table_body += '<label for="from">From:</label>';
@@ -64,6 +68,7 @@ function time_form(i, j) {
     table_body += '';
     $('#modal_form').html(table_body);
 }
+
 function title_form(i, j) {
     var table_body = '<form id=title_form' + i + j + '>';
     table_body += '<label for="title">Title:</label>';
@@ -78,19 +83,19 @@ function title_form(i, j) {
     table_body += '';
     $('#modal_form').html(table_body);
 }
-$(document).ready(function () {
-    $("#generateTable").click(function () {
+$(document).ready(function() {
+    $("#generateTable").click(function() {
         var number_of_rows = 5;
         var number_of_cols = 8;
-        var table_body = '<table border="1">';
+        var table_body = '<table border="2" class="table">';
         var x = 0;
         for (i = 0; i <= number_of_rows; i++) {
             table_body += '<tr>';
 
-            for (j = 0; j < number_of_cols; j++) {// id="cell'+i+j+'
+            for (j = 0; j < number_of_cols; j++) { // id="cell'+i+j+'
                 table_body += '<td>';
                 if (i == 0 && j != 0) {
-                    table_body += '<div id="time' + i + j + '"><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"" onclick="time_form(' + i + ',' + j + ')">Time</button></div>';
+                    table_body += '<div id="time' + i + j + '"><button type="button" class="button-design"  data-toggle="modal" data-target="#exampleModalCenter"" onclick="time_form(' + i + ',' + j + ')">Time</button></div>';
                 }
                 if (i == 0 && j == 0) {
                     table_body += '<h7>Day/Time</h7>';
@@ -100,14 +105,14 @@ $(document).ready(function () {
                     table_body += '<h7>' + day + '</h7>';
                 }
                 if (i != 0 && j != 0) {
-                    table_body += '<div id="title' + i + j + '"><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">Title</button></div>';
+                    table_body += '<div id="title' + i + j + '"><button type="button" class="button-design"  data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">Title</button></div>';
                 }
                 table_body += '</td>';
             }
             table_body += '</tr>';
         }
         table_body += '</table>';
-        table_body += '<br/><button type="submit" onclick="compileData(' + number_of_rows + ',' + number_of_cols + ')">Submit</button>';
+        table_body += '<br/><button type="submit" class="submit-design" onclick="compileData(' + number_of_rows + ',' + number_of_cols + ')">Submit</button>';
         $('#tableDiv').html(table_body);
     });
 });

@@ -30,3 +30,36 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+.heading {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.vector {
+    /*background-image: url("/static/istockphoto-984759276-612x612\ \(1\).jpg");*/
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+}
+
+.table {
+    background-color: white;
+    align-items: center;
+    width: 50rem;
+    margin: auto;
+}
+
+.button-design {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.submit-design {
+    background-color: lightseagreen;
+    align-items: center;
+    margin: auto;
+}
