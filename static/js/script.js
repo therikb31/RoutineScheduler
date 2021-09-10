@@ -3,26 +3,21 @@ let j = 0;
 let time = [];
 let days = ["Monday", "Tuesday", "Wednesday", "Thurdsay", "Friday"];
 let events = [];
-/*
-$(document).ready(function () {
-    function compileData() {
-        var js_data = JSON.stringify(events);
-        $.ajax({                        
-            url: '/fetchData',
-            type : 'post',
-            contentType: 'application/json',
-            dataType : 'json',
-            data : js_data
-        }).done(function(result) {
-            console.log(result);
-            $("#data").html(result);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log("fail: ",textStatus, errorThrown);
-        });
-    };
-});*/
+
 function compileData() {
-    console.log(events);
+    var js_data = JSON.stringify(events);
+    $.ajax({
+        url: '/events',
+        type: 'post',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: js_data
+    }).done(function (result) {
+        console.log(result);
+        $("#data").html(result);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("fail: ", textStatus, errorThrown);
+    });
 }
 
 function updateTitle(i, j) {
@@ -32,8 +27,8 @@ function updateTitle(i, j) {
         if (time[a].index == j) {
             var title = document.getElementById('title_form' + i + j).elements.namedItem("title").value;
             var link = document.getElementById('title_form' + i + j).elements.namedItem("link").value;
-            var html = '<button type="button" data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">' + title + '</button>';
-            temp = { from: time[a].from, to: time[a].to, title: title, link: link };
+            var html = '<button type="button" class="button-design" data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">' + title + '</button>';
+            temp = { day: days[i - 1], from: time[a].from, to: time[a].to, title: title, link: link };
             events.push(temp);
             $('#title' + i + j).html(html);
             f = 1;
@@ -83,8 +78,8 @@ function title_form(i, j) {
     table_body += '';
     $('#modal_form').html(table_body);
 }
-$(document).ready(function() {
-    $("#generateTable").click(function() {
+$(document).ready(function () {
+    $("#generateTable").click(function () {
         var number_of_rows = 5;
         var number_of_cols = 8;
         var table_body = '<table border="2" class="table">';
