@@ -15,9 +15,8 @@ function compileData() {
     }).done(function (result) {
         console.log(result);
         $("#data").html(result);
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("fail: ", textStatus, errorThrown);
     });
+    //window.location.href = "/modal"; 
 }
 
 function updateTitle(i, j) {
@@ -28,7 +27,12 @@ function updateTitle(i, j) {
             var title = document.getElementById('title_form' + i + j).elements.namedItem("title").value;
             var link = document.getElementById('title_form' + i + j).elements.namedItem("link").value;
             var html = '<button type="button" class="button-design" data-toggle="modal" data-target="#exampleModalCenter"" onclick="title_form(' + i + ',' + j + ')">' + title + '</button>';
-            temp = { day: days[i - 1], from: time[a].from, to: time[a].to, title: title, link: link };
+            for (var b=0;b<events.length;b++){
+                if(events[b].i==i && events[b].j==j){
+                events.splice(b,1);
+                }
+            }
+            temp = { i:i,j:j,day: days[i - 1], from: time[a].from, to: time[a].to, title: title, link: link };
             events.push(temp);
             $('#title' + i + j).html(html);
             f = 1;
@@ -41,9 +45,25 @@ function updateTitle(i, j) {
 };
 
 function updateTime(i, j) {
+    
     var from = document.getElementById('time_form' + i + j).elements.namedItem("from").value;
     var to = document.getElementById('time_form' + i + j).elements.namedItem("to").value;
-    var html = '<h6>' + from + '-' + to + '</h6>';
+    var html = '<button type="button" class="button-design" data-toggle="modal" data-target="#exampleModalCenter"" onclick="time_form(' + i + ',' + j + ')">' +  from + '-' + to + '</button>';
+    var f=-1;
+    for (var a=0;a<time.length;a++){
+        if(time[a].index==j){
+            time.splice(a,1);
+            f=j;
+        }
+    }
+    if(f!=-1){
+        for(var a =0;a<events.length;a++){
+            if(events[a].j==f){
+                events[a].to=to;
+                events[a].from=from;
+            }
+        }
+    }
     temp = { index: j, from: from, to: to };
     time.push(temp);
     $('#time' + i + j).html(html);
@@ -78,8 +98,9 @@ function title_form(i, j) {
     table_body += '';
     $('#modal_form').html(table_body);
 }
+//$("#generateTable").click(function ()
 $(document).ready(function () {
-    $("#generateTable").click(function () {
+     {
         var number_of_rows = 5;
         var number_of_cols = 8;
         var table_body = '<table border="2" class="table">';
@@ -107,7 +128,7 @@ $(document).ready(function () {
             table_body += '</tr>';
         }
         table_body += '</table>';
-        table_body += '<br/><button type="submit" class="submit-design" onclick="compileData(' + number_of_rows + ',' + number_of_cols + ')">Submit</button>';
+        table_body += '<br/><button type="submit" class="submit-design" data-toggle="modal" data-target="#filename" onclick="compileData(' + number_of_rows + ',' + number_of_cols + ')">Submit</button>';
         $('#tableDiv').html(table_body);
-    });
+    }/*);*/
 });

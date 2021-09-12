@@ -15,17 +15,13 @@
             $('#myInput').trigger('focus')
         })
     </script>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
 
     <div>
-        
-        <button id="generateTable">Create Table</button>
-
         <div class="table" id="tableDiv" style="margin-top: 40px">
-            Table will gentare here.
             <div id="modal"></div>
         </div>
     </div>
@@ -37,13 +33,31 @@
                     </button>
                 </div>
                 <div class="modal-body" id="modal_form">
-                    ...
+                    
                 </div>
                 <div class="modal-footer">
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="filename" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-content">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_form">
+                    <h4>Share this code to copy routine</h4>
+                    <h3>{{filename}}</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="Close" onclick='window.location = "/";' class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 
 </body>
