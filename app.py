@@ -90,11 +90,11 @@ def addevent(event, service):
         'description': link,
         'start': {
             'dateTime': startDateTime,
-            'timeZone': time.tzname,
+            'timeZone': 'IST',
         },
         'end': {
             'dateTime': endDateTime,
-            'timeZone': time.tzname,
+            'timeZone': 'IST',
         },
         'recurrence': [
             'RRULE:FREQ=WEEKLY;COUNT=24'
