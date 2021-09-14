@@ -34,7 +34,9 @@ def scheduler():
     records.close()
     return render_template("dynamicTable.html",filename=filename)
 
-
+@app.route('/importData', methods=['GET','POST'])
+def importData():
+    
 @app.route('/events', methods=['GET','POST'])
 def events():
     data = request.get_json()
@@ -112,11 +114,10 @@ def addevent(event, service):
 
 @app.route('/schedule')
 def schedular():
-    records_list=[100001]
-    records = open('static/database/records', 'wb')
-    pickle.dump(records_list, records)
-    records.close()
+    records = open('static/database/100019', 'rb')
+    records_list = pickle.load(records)
     print(records_list)
+    records.close()
     return("Ok")
 
 
