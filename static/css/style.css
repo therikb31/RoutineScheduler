@@ -1,5 +1,5 @@
 body {
-    background-image: url("/static/other/cool-background.png");
+    background-image: url("/static/other/IMAGE1.jpg");
     background-color: #cccccc;
     background-repeat: no-repeat;
     width: 100%;
@@ -48,6 +48,8 @@ li a:hover {
 
 .table {
     background-color: white;
+    border-style: solid;
+    border-color: #368B85;
     align-items: center;
     width: 50rem;
     margin: auto;
@@ -60,6 +62,13 @@ li a:hover {
 
 .submit-design {
     background-color: lightseagreen;
-    align-items: center;
+    width: 100px;
+    height: 35px;
+    font-size: 20px;
+    color: cornsilk;
+    border: 0px ;
+    border-radius: 10px;
+    cursor: pointer;
+    display: grid;
     margin: auto;
 }
