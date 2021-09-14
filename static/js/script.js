@@ -1,7 +1,7 @@
 let i = 0;
 let j = 0;
 let time = [];
-let days = ["Monday", "Tuesday", "Wednesday", "Thurdsay", "Friday"];
+let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 let events = [];
 
 function compileData() {

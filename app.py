@@ -30,7 +30,7 @@ def scheduler():
     records = open('static/database/records', 'rb')
     records_list = pickle.load(records)
     filename=records_list[-1]+1
-    print(records_list,"\n", filename)
+    #print(records_list,"\n", filename)
     records.close()
     return render_template("dynamicTable.html",filename=filename)
 
@@ -50,7 +50,7 @@ def events():
     pickle.dump(records_list, records)
     records.close()
     outfile.close()
-    print(data)
+    print(data,end="\n")
     service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
     for i in range(len(data)):
         addevent(data[i], service)
@@ -81,8 +81,9 @@ def addevent(event, service):
         date = today + datetime.timedelta(days=2-today.weekday(), weeks=1)
     elif(day == "Thursday"):
         date = today + datetime.timedelta(days=3-today.weekday(), weeks=1)
-    elif(day == "Friday"):
+    else:
         date = today + datetime.timedelta(days=4-today.weekday(), weeks=1)
+    print("\nDate"+str(date)+"\n")
     startDateTime = str(date)+"T"+startTime+":00"
     endDateTime = str(date)+"T"+endTime+":00"
     desc = {
