@@ -33,9 +33,6 @@ def scheduler():
     #print(records_list,"\n", filename)
     records.close()
     return render_template("dynamicTable.html",filename=filename)
-
-@app.route('/importData', methods=['GET','POST'])
-def importData():
     
 @app.route('/events', methods=['GET','POST'])
 def events():
@@ -62,10 +59,12 @@ def events():
 def modal(filename):
     return render_template("modal.html",value=filename)
 
-@app.route('/import', methods=['GET','POST'])
+@app.route('/importSchedule', methods=['GET','POST'])
 def importSchedule():
-    x=0
-    return render_template("index.html")
+    if(request.method=='POST'):
+        eventId = request.form['eventId']
+        print(eventId)
+    return render_template("form.html")
 
 def addevent(event, service):
 

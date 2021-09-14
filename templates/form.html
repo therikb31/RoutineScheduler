@@ -16,16 +16,15 @@
 
         <li><a class="active" href="#home">Home</a></li>
         <li><a href="/scheduler">Scheduler</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="g-signin2" data-onsuccess="onSignIn"></li>
+        <li><a href="/importSchedule">Import</a></li>
     </ul>
     <div class="paragraph">
         <p>Enter the unique schedule ID to import your class routine to the Google Calender App</p>
         <div class="box">
             <div class="formcontent">
-                <form action="#">
+                <form action="/importSchedule" method="POST">
                     <label for="eventId">EVENT ID</label><br>
-                    <input type="number" id="eventId" class="input">
+                    <input type="number" id="eventId" name="eventId" class="input">
                     <input type="submit" class="button">
                     <input type="reset" class="button">
 
