@@ -11,6 +11,7 @@ from Google import Create_Service
 import json
 import pickle
 import time
+import os.path
 import datetime
 
 app = Flask(__name__)
@@ -29,12 +30,13 @@ def hello_world():
 def scheduler():
     records = open('static/database/records', 'rb')
     records_list = pickle.load(records)
-    filename=records_list[-1]+1
+    filename = records_list[-1]+1
     #print(records_list,"\n", filename)
     records.close()
-    return render_template("dynamicTable.html",filename=filename)
-    
-@app.route('/events', methods=['GET','POST'])
+    return render_template("dynamicTable.html", filename=filename)
+
+
+@app.route('/events', methods=['GET', 'POST'])
 def events():
     data = request.get_json()
     records = open('static/database/records', 'rb')
@@ -49,25 +51,36 @@ def events():
     pickle.dump(records_list, records)
     records.close()
     outfile.close()
-    print(data,end="\n")
+    print(data, end="\n")
     service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
     for i in range(len(data)):
         addevent(data[i], service)
     return ("modal.html")
 
-@app.route('/modal', methods=['GET','POST'])
-def modal(filename):
-    return render_template("modal.html",value=filename)
 
-@app.route('/importSchedule', methods=['GET','POST'])
+@app.route('/modal', methods=['GET', 'POST'])
+def modal(filename):
+    return render_template("modal.html", value=filename)
+
+
+@app.route('/importSchedule', methods=['GET', 'POST'])
 def importSchedule():
-    if(request.method=='POST'):
+    if(request.method == 'POST'):
         eventId = request.form['eventId']
-        records = open('static/database/100019', 'rb')
-        records_list = pickle.load(records)
-        print(records_list)
-        records.close()
+        path = 'static/database/'+str(eventId)
+        if(os.path.isfile(path)):
+            file = open(path, 'rb')
+            data = pickle.load(file)
+            file.close()
+            service = Create_Service(
+                CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
+            for i in range(len(data)):
+                addevent(data[i], service)
+        else:
+            return("Not Found!")
+        
     return render_template("form.html")
+
 
 def addevent(event, service):
 
