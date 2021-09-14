@@ -63,7 +63,10 @@ def modal(filename):
 def importSchedule():
     if(request.method=='POST'):
         eventId = request.form['eventId']
-        print(eventId)
+        records = open('static/database/100019', 'rb')
+        records_list = pickle.load(records)
+        print(records_list)
+        records.close()
     return render_template("form.html")
 
 def addevent(event, service):
