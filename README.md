@@ -5,3 +5,7 @@ Frontend - HTML , CSS and JavaScript
 Backend - Python
 Framework - Django
 Third Party API - Google Calendar API
+
+<br/>
+Required UI Upgrades
+Eligable for Hacktoberfest 2021
